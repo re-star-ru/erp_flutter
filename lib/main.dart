@@ -1,0 +1,195 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:test_flutter/barcode.dart';
+import 'package:test_flutter/desk_layout.dart';
+import 'package:test_flutter/home.dart';
+import 'package:test_flutter/search/search.dart';
+
+void main() {
+  runApp(const BlocMyApp());
+}
+
+enum ScreenSize { Phone, PC }
+
+ScreenSize getSize(BuildContext context) {
+  double deviceWidth = MediaQuery.of(context).size.shortestSide;
+  if (deviceWidth > 600) return ScreenSize.PC;
+  return ScreenSize.Phone;
+}
+
+class BlocMyApp extends StatelessWidget {
+  const BlocMyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BarcodeCubit>(
+          create: (context) => BarcodeCubit(),
+        ),
+        BlocProvider<SearchCubit>(
+          create: (context) => SearchCubit(),
+        ),
+      ],
+      child: const FocusMyApp(),
+    );
+  }
+}
+
+class FocusMyApp extends StatelessWidget {
+  const FocusMyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Focus(
+      autofocus: true,
+      onKeyEvent: (node, event) {
+        if (event is! KeyDownEvent) {
+          return KeyEventResult.ignored;
+        }
+
+        context.read<BarcodeCubit>().keyEvent(event);
+
+        return KeyEventResult.ignored;
+      },
+      child: MyApp(),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
+  final _router = GoRouter(
+    routes: [
+      GoRoute(path: '/', builder: (context, state) => const MyAppPage()),
+      GoRoute(path: '/home', builder: (context, state) => Home()),
+    ],
+    // errorBuilder: (context, state) => Center(
+    //   child: Text('Error $state'),
+    // ),
+  );
+
+  @override
+  Widget build(BuildContext context) => MaterialApp.router(
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+          PointerDeviceKind.stylus,
+          PointerDeviceKind.unknown,
+        }),
+        routeInformationProvider: _router.routeInformationProvider,
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
+      );
+}
+
+class MyAppPage extends StatelessWidget {
+  const MyAppPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      final size = getSize(context);
+      if (size == ScreenSize.PC) {
+        // return const MyHomePageStateless(title: 'Barcode Focus Reader');
+        return Scaffold(
+          body: MyBox(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => context.go('/home'),
+            child: const Icon(Icons.search_outlined),
+          ),
+        );
+      }
+
+      return const MyTabBar();
+    });
+  }
+}
+
+class MyTabBar extends StatelessWidget {
+  const MyTabBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      initialIndex: 1,
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('TabBar Widget'),
+          bottom: const TabBar(
+            labelColor: Colors.brown,
+            indicatorColor: Colors.black,
+            tabs: [
+              Tab(icon: Icon(Icons.home_outlined)),
+              Tab(icon: Icon(Icons.beach_access_sharp)),
+              Tab(icon: Icon(Icons.brightness_5_sharp)),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            Center(
+              child: Text("It's cloudy here"),
+            ),
+            Center(
+              child: Text("It's rainy here"),
+            ),
+            Center(
+              child: Text("It's sunny here"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyHomePageStateless extends StatelessWidget {
+  const MyHomePageStateless({super.key, required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          TextField(),
+          BarcodeText(),
+        ],
+      ),
+    );
+  }
+}
+
+class BarcodeText extends StatelessWidget {
+  const BarcodeText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<BarcodeCubit, BarcodeState>(
+      builder: (context, state) {
+        return Text(state.text);
+      },
+      buildWhen: ((prev, curr) {
+        if (curr.status == BarcodeStatus.end) {
+          return true;
+        }
+
+        return false;
+      }),
+    );
+  }
+}
