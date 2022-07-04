@@ -7,6 +7,7 @@ import 'package:test_flutter/barcode.dart';
 import 'package:test_flutter/desk_layout.dart';
 import 'package:test_flutter/home.dart';
 import 'package:test_flutter/search/search.dart';
+import 'package:test_flutter/sku_info/sku_cubit.dart';
 
 void main() {
   runApp(const BlocMyApp());
@@ -32,6 +33,9 @@ class BlocMyApp extends StatelessWidget {
         ),
         BlocProvider<SearchCubit>(
           create: (context) => SearchCubit(),
+        ),
+        BlocProvider<SkuCubit>(
+          create: (context) => SkuCubit(),
         ),
       ],
       child: const FocusMyApp(),

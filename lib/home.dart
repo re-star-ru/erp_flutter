@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:go_router/go_router.dart";
 import 'package:test_flutter/search/search.dart';
+import 'package:test_flutter/sku_info/sku.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -18,6 +19,7 @@ class Home extends StatelessWidget {
           child: const Icon(Icons.close_outlined),
         ),
         body: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               flex: 3,
@@ -27,7 +29,10 @@ class Home extends StatelessWidget {
             ),
             Expanded(
               flex: 9,
-              child: Container(color: Colors.lightGreenAccent),
+              // child: const SkuInfoView(),
+              child: Container(
+                child: const SkuInfoView(),
+              ),
             )
           ],
         ));
@@ -52,8 +57,7 @@ class SearchTable extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               enabled: true,
-              leading: Text('leading ${state.result[index].sku}'),
-              title: Text("Item $index"),
+              title: Text(state.result[index].sku),
               onTap: () {
                 print('on intem click $index');
               },
@@ -75,6 +79,7 @@ class SearchInput extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextField(
+        autofocus: true,
         controller: TextEditingController(),
         onChanged: (value) {
           _debouncer.run(() => context.read<SearchCubit>().search(value));
