@@ -7,6 +7,7 @@ import 'package:test_flutter/barcode.dart';
 import 'package:test_flutter/desk_layout.dart';
 import 'package:test_flutter/home.dart';
 import 'package:test_flutter/search/search.dart';
+import 'package:test_flutter/sku_info/overlay/overlay.dart';
 import 'package:test_flutter/sku_info/sku_cubit.dart';
 
 void main() {
@@ -36,6 +37,9 @@ class BlocMyApp extends StatelessWidget {
         ),
         BlocProvider<SkuCubit>(
           create: (context) => SkuCubit(),
+        ),
+        BlocProvider<OverlayCubit>(
+          create: (context) => OverlayCubit(),
         ),
       ],
       child: const FocusMyApp(),
@@ -81,6 +85,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp.router(
         theme: ThemeData(
           useMaterial3: true,
+          textTheme: Theme.of(context).textTheme.apply(
+                fontSizeFactor: 1.05,
+                fontSizeDelta: 1.5,
+              ),
         ),
         scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
           PointerDeviceKind.mouse,

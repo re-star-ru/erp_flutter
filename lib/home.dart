@@ -22,16 +22,16 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Column(
                 children: [SearchInput(focus), Expanded(child: SearchTable())],
               ),
             ),
             Expanded(
-              flex: 9,
+              flex: 10,
               // child: const SkuInfoView(),
               child: Container(
-                child: const SkuInfoView(),
+                child: SkuInfoView(),
               ),
             )
           ],
