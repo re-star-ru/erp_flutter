@@ -17,7 +17,7 @@ class SkuInfoView extends StatelessWidget {
       children: [
         BlocBuilder<SkuCubit, SkuInfo>(
           builder: (context, state) {
-            if (state.entriyes.isEmpty) {
+            if (state.entries.isEmpty) {
               return const Center(child: CircularProgressIndicator());
             }
 
@@ -32,7 +32,7 @@ class SkuInfoView extends StatelessWidget {
 }
 
 class MyTableFloat extends StatelessWidget {
-  MyTableFloat(this._skuInfo, {super.key});
+  const MyTableFloat(this._skuInfo, {super.key});
 
   final SkuInfo _skuInfo;
 
@@ -46,34 +46,83 @@ class MyTableFloat extends StatelessWidget {
       border: TableBorder.all(color: Colors.black),
       children: [
         TableRow(children: [
-          Text("Товар"),
-          Text("Цена"),
-          ..._skuInfo.warehouses.values.map((id) => Text(id)).toList(),
+          const TextCell("Товар"),
+          const TextCell("Цена"),
+          ..._skuInfo.warehouses.map((w) => TextCell(w.name)).toList(),
         ]),
-        TableRow(children: [
-          const Text("cs125 rg"),
-          const Text("1231231.23"),
-          WarehouseCell(),
-          WarehouseCell(),
-        ]),
-        ...List<TableRow>.generate(
-          100,
-          (index) => TableRow(children: [
-            const Text("cs125 rg"),
-            const Text("1231231.23"),
-            WarehouseCell(),
-            WarehouseCell()
-          ]),
-        )
+        ..._skuInfo.entries.map((entry) {
+          return TableRow(
+            children: [
+              ProductCell(entry.name, entry.characteristic, entry.description),
+              TextCell('${entry.price} руб.'),
+              ..._skuInfo.warehouses.map((w) {
+                final a = entry.warehouses[w.id];
+                if (a == null) {
+                  return const TextCell("");
+                }
+
+                return WarehouseCell(a.quantity);
+              }).toList(),
+            ],
+          );
+        }).toList(),
       ],
     );
   }
 }
 
+class TextCell extends StatelessWidget {
+  const TextCell(this._data, {super.key});
+
+  final String _data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Text(_data),
+    );
+  }
+}
+
+class ProductCell extends StatelessWidget {
+  const ProductCell(this._name, this._char, this._description, {super.key});
+
+  final String _name, _char, _description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: _char,
+              style: DefaultTextStyle.of(context)
+                  .style
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(
+              text: ' $_name',
+              style: DefaultTextStyle.of(context).style,
+            ),
+            TextSpan(
+              text: '\n$_description',
+              style: DefaultTextStyle.of(context).style,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class WarehouseCell extends StatelessWidget {
-  WarehouseCell({super.key});
+  WarehouseCell(this._quantity, {super.key});
 
   final _key = GlobalKey();
+  final double _quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -81,115 +130,14 @@ class WarehouseCell extends StatelessWidget {
       key: _key,
       cursor: SystemMouseCursors.help,
       onEnter: (event) {
-        Logger().d("hover!");
+        // Logger().d("hover!");
         context.read<OverlayCubit>().showOverlay(_key);
       },
       onExit: (event) {
-        Logger().d("unhover!");
+        // Logger().d("unhover!");
         context.read<OverlayCubit>().showOverlay(GlobalKey());
       },
-      child: Container(
-        child: Text("123 шт."),
-        padding: EdgeInsets.all(4),
-      ),
+      child: TextCell('$_quantity шт.'),
     );
   }
-}
-
-class MyTable extends StatelessWidget {
-  const MyTable(this._skuInfo, {super.key});
-
-  final SkuInfo _skuInfo;
-
-  @override
-  Widget build(BuildContext context) {
-    return DataTable(
-      columns: [
-        DataColumn(label: Text("Товар")),
-        DataColumn(label: Text("Цена")),
-        DataColumn(
-          label: Text("Новая станция"),
-          tooltip: "Нажмите для показа ячейки",
-        ),
-        DataColumn(
-          label: Text("Старая станция"),
-          tooltip: "Нажмите для показа ячейки",
-        ),
-      ],
-      rows: List<DataRow>.generate(
-        100,
-        (index) => ProductRow(context, "cs125", "RG", 133.23, 10),
-      ),
-    );
-  }
-}
-
-DataRow ProductRow(
-  BuildContext context,
-  String name,
-  String char,
-  double price,
-  int quantity,
-) {
-  var n = RichText(
-    text: TextSpan(
-      children: [
-        TextSpan(
-          text: char,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        TextSpan(
-          text: " $name",
-          style: const TextStyle(color: Colors.black),
-        ),
-        const TextSpan(
-          text: "\nописание asdf asdf",
-          style: TextStyle(color: Colors.black, fontStyle: FontStyle.italic),
-        ),
-      ],
-    ),
-  );
-
-  return DataRow(
-    cells: [
-      DataCell(n),
-      DataCell(Text('$price р.')),
-      MyDataCell(context, Text('$quantity шт.')),
-      MyDataCell(context, Text('$quantity шт.')),
-    ],
-  );
-}
-
-DataCell MyDataCell(BuildContext context, Widget child) {
-  final key = GlobalKey();
-
-  return DataCell(
-    Container(
-      key: key,
-      constraints: const BoxConstraints.expand(),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.help,
-        onEnter: (value) {
-          Logger().d("hover!");
-          context.read<OverlayCubit>().showOverlay(key);
-        },
-        onExit: (value) {
-          Logger().d("unhover!");
-          context.read<OverlayCubit>().showOverlay(GlobalKey());
-        },
-        child: child,
-      ),
-    ),
-    // onTap: () {},
-  );
-
-  //    InkWell(
-  //   key: key,
-  //   child: child,
-  //   onHover: (value) {
-  //     Logger().d("on hover");
-  //   },
-  //   onTap: () {},
-  // ));
 }

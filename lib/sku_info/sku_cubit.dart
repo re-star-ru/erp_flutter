@@ -4,7 +4,7 @@ class SkuCubit extends Cubit<SkuInfo> {
   SkuCubit()
       : super(SkuInfo(
           "default",
-          {"ID": "Новый склад", "ID2": "Старый склад"},
+          [Warehouse("1", "Новый склад"), Warehouse("2", "Старый склад")],
           testEntries(),
         ));
 
@@ -17,12 +17,18 @@ class SkuInfo {
   SkuInfo(
     this.name,
     this.warehouses,
-    this.entriyes,
+    this.entries,
   );
   final String name;
 
-  final Map<String, String> warehouses;
-  final List<SkuEntry> entriyes;
+  final List<Warehouse> warehouses;
+  final List<SkuEntry> entries;
+}
+
+class Warehouse {
+  Warehouse(this.id, this.name);
+  final String id;
+  final String name;
 }
 
 class SkuEntry {
@@ -30,11 +36,12 @@ class SkuEntry {
     this.sku,
     this.name,
     this.characteristic,
+    this.description,
     this.price,
     this.warehouses,
   );
 
-  final String sku, name, characteristic;
+  final String sku, name, characteristic, description;
   final double price;
   final Map<String, WarehouseEntry> warehouses; // id > warehouse
 }
@@ -57,18 +64,34 @@ List<SkuEntry> testEntries() {
       "sku",
       "name",
       "characteristic",
+      "стартер бла",
       123243.22,
       {
-        "ID": WarehouseEntry(
+        "1": WarehouseEntry(
           1.0,
           [
             CellEntry("cell", 1.0),
           ],
         ),
-        "ID2": WarehouseEntry(
+        "2": WarehouseEntry(
           2.0,
           [
             CellEntry("cell", 2.0),
+          ],
+        ),
+      },
+    ),
+    SkuEntry(
+      "sku2",
+      "name2",
+      "characteristic2",
+      "стартер бла2",
+      123243.22,
+      {
+        "1": WarehouseEntry(
+          1.0,
+          [
+            CellEntry("cell", 1.0),
           ],
         ),
       },

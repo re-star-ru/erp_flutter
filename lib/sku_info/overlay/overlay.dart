@@ -43,19 +43,19 @@ class WarehouseInfoOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (pkey.currentContext == null) {
-      Logger().d("pkey.currentContext == null");
+      // Logger().d("pkey.currentContext == null");
       return Container();
     }
 
     if (_rootKey.currentContext == null) {
-      Logger().d("_rootKey.currentContext == null");
+      // Logger().d("_rootKey.currentContext == null");
       return Container();
     }
 
     final rootBox = _rootKey.currentContext!.findRenderObject() as RenderBox;
     final rootOffset = rootBox.localToGlobal(Offset.zero);
 
-    Logger().d("rootOffset: $rootOffset");
+    // Logger().d("rootOffset: $rootOffset");
 
     final box = pkey.currentContext!.findRenderObject() as RenderBox;
     final position = box.localToGlobal(Offset(-rootOffset.dx, 0));
