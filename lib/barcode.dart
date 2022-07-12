@@ -36,7 +36,6 @@ class BarcodeCubit extends Cubit<BarcodeState> {
         if (delay < maxDelay) {
           if (key.logicalKey.keyLabel == 'Enter') {
             emit(BarcodeState(BarcodeStatus.end, state.text, key.timeStamp));
-            print("Barcode: ${state.text}");
             return;
           }
 

@@ -11,7 +11,7 @@ class MyBox extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
-          children: [
+          children: const [
             SearchBtn(),
             Tabs(),
           ],
@@ -19,7 +19,7 @@ class MyBox extends StatelessWidget {
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: const [
               Bx(),
               Expanded(child: Bx()),
             ],
@@ -42,7 +42,7 @@ class Tabs extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 30,
           itemBuilder: (context, index) {
-            return MyTab();
+            return const MyTab();
           },
           separatorBuilder: (context, index) {
             return const SizedBox(width: 5);
@@ -61,14 +61,14 @@ class MyTab extends StatelessWidget {
     return OutlinedButton(
       style: TextButton.styleFrom(
         backgroundColor: Colors.grey[100],
-        shape: BeveledRectangleBorder(
+        shape: const BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         padding: const EdgeInsets.all(8),
         minimumSize: const Size(60, 60),
       ),
-      onPressed: (() => print("tab")),
-      child: Text("Tab"),
+      onPressed: (() => {}),
+      child: const Text("Tab"),
     );
   }
 }
@@ -81,7 +81,7 @@ class SearchBtn extends StatelessWidget {
     return ElevatedButton(
       style: TextButton.styleFrom(
         backgroundColor: Colors.grey[100],
-        shape: BeveledRectangleBorder(
+        shape: const BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         padding: const EdgeInsets.all(8),
@@ -109,7 +109,7 @@ class Bx extends StatelessWidget {
           width: 1,
         ),
       ),
-      child: Text("KK"),
+      child: const Text("KK"),
     );
   }
 }

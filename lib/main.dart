@@ -14,12 +14,12 @@ void main() {
   runApp(const BlocMyApp());
 }
 
-enum ScreenSize { Phone, PC }
+enum ScreenSize { phone, pc }
 
 ScreenSize getSize(BuildContext context) {
   double deviceWidth = MediaQuery.of(context).size.shortestSide;
-  if (deviceWidth > 600) return ScreenSize.PC;
-  return ScreenSize.Phone;
+  if (deviceWidth > 600) return ScreenSize.pc;
+  return ScreenSize.phone;
 }
 
 class BlocMyApp extends StatelessWidget {
@@ -109,10 +109,10 @@ class MyAppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final size = getSize(context);
-      if (size == ScreenSize.PC) {
+      if (size == ScreenSize.pc) {
         // return const MyHomePageStateless(title: 'Barcode Focus Reader');
         return Scaffold(
-          body: MyBox(),
+          body: const MyBox(),
           floatingActionButton: FloatingActionButton(
             onPressed: () => context.go('/home'),
             child: const Icon(Icons.search_outlined),

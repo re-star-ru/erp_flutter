@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -17,7 +16,6 @@ class SearchCubit extends Cubit<SearchResult> {
       return;
     }
 
-    print("SEARCH");
     emit(SearchResult(SearchStatus.loading, text, []));
     final result = await requetst(text);
     emit(

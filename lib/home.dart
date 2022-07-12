@@ -24,15 +24,16 @@ class Home extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Column(
-                children: [SearchInput(focus), Expanded(child: SearchTable())],
+                children: [
+                  SearchInput(focus),
+                  const Expanded(child: SearchTable())
+                ],
               ),
             ),
             Expanded(
               flex: 10,
               // child: const SkuInfoView(),
-              child: Container(
-                child: SkuInfoView(),
-              ),
+              child: SkuInfoView(),
             )
           ],
         ));
@@ -46,8 +47,6 @@ class SearchTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<SearchCubit>().state;
 
-    print('STATE: ${state.status}');
-
     switch (state.status) {
       case SearchStatus.loading:
         return const Center(child: CircularProgressIndicator());
@@ -58,9 +57,7 @@ class SearchTable extends StatelessWidget {
             return ListTile(
               enabled: true,
               title: Text(state.result[index].sku),
-              onTap: () {
-                print('on intem click $index');
-              },
+              onTap: () {},
             );
           },
         );

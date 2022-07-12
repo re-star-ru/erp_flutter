@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 
 class OverlayCubit extends Cubit<Overlay> {
   OverlayCubit() : super(Overlay(null));
@@ -12,7 +11,7 @@ class OverlayCubit extends Cubit<Overlay> {
 
 class Overlay {
   Overlay(this._globalKey);
-  GlobalKey? _globalKey;
+  final GlobalKey? _globalKey;
 }
 
 class OverlayView extends StatelessWidget {
