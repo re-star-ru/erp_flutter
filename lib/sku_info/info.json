@@ -1,50 +1,153 @@
 {
-  "sku": "cs125",
-  "warehouses": [
-    { "id": "1", "name": "Новая станция" },
-    { "id": "2", "name": "Старая станция" }
-  ],
-
-  "entries": [
-    {
-      "name": "js125",
-      "char": "RG",
-      "description": "description",
-      "price": "100",
-
-      "warehouses": [
-        {
-          "id": "1",
-          "quantity": "10",
-          "cells": [
-            { "id": "N2_1", "quantity": "1" },
-            { "id": "N2_2", "quantity": "9" }
-          ]
-        },
-        {
-          "id": "2",
-          "quantity": "5",
-          "cells": [{ "id": "S2_1", "quantity": "5" }]
-        }
-      ]
+  "body": {
+    "sku": "130301",
+    "warehouses": {
+      "362240d1-9a27-11e8-9be4-e0d55e81d6d7": "Основной склад",
+      "65d41380-b1a5-11e8-669f-aaa17dc935d5": "Новый склад"
     },
-
-    {
-      "name": "js126",
-      "char": "RG",
-      "description": "description",
-      "price": "100",
-
-      "warehouses": [
-        {
-          "id": "1",
-          "quantity": "10",
-          "cells": [
-            { "id": "N2_1", "quantity": "1" },
-            { "id": "N2_2", "quantity": "9" }
-          ]
-        }
-      ]
+    "entries": {
+      "3116dcbc-afd8-11ea-088b-5232fd583af9": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "UP",
+        "name": "SNLS278",
+        "description": "Электромагнит BO 12V"
+      },
+      "b6de8882-9031-11e1-815b-0025117f92fc": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "ZM",
+        "name": "ZM544",
+        "description": "Электромагнит BO 12V"
+      },
+      "9f8543b0-0fe3-11e8-d795-6a82dc278843": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "TT",
+        "name": "TT76012",
+        "description": "Электромагнит BO 12V"
+      },
+      "cfb57e7c-2a63-11eb-839f-5232fd583af9": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "RG",
+        "name": "ZM544",
+        "description": "Электромагнит BO 12V"
+      },
+      "328e2436-a8fc-11e8-b693-aaa17dc935d5": {
+        "quantity": 4,
+        "selection": 0,
+        "char": "RG",
+        "warehouses": {
+          "362240d1-9a27-11e8-9be4-e0d55e81d6d7": {
+            "quantity": 1,
+            "selection": 0,
+            "cells": [
+              {
+                "id": "S3_09-A-08",
+                "quantity": 1,
+                "selection": 0
+              }
+            ]
+          },
+          "65d41380-b1a5-11e8-669f-aaa17dc935d5": {
+            "quantity": 3,
+            "selection": 0,
+            "cells": [
+              {
+                "id": "N2_12-F-04-1",
+                "quantity": 3,
+                "selection": 0
+              }
+            ]
+          }
+        },
+        "name": "130301",
+        "description": "Электромагнит BO 12V"
+      },
+      "f7005b20-d94f-11e9-b48e-a289fb69b969": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "KR",
+        "name": "SSB0301UL",
+        "description": "Электромагнит BO 12V"
+      },
+      "0b7ecc30-afd8-11ea-088b-5232fd583af9": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "WAI",
+        "name": "66-9100",
+        "description": "Электромагнит BO 12V"
+      },
+      "d5577ce2-afd7-11ea-088b-5232fd583af9": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "CG",
+        "name": "333368",
+        "description": "Электромагнит BO 12V"
+      },
+      "d87fa9d4-cfea-11e0-8128-0025117f92fc": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "AS",
+        "name": "SS0003",
+        "description": "Электромагнит BO 12V"
+      },
+      "16090e60-5f0c-11ec-f49b-02420a34003c": {
+        "quantity": 1,
+        "selection": 0,
+        "char": "ZM",
+        "warehouses": {
+          "362240d1-9a27-11e8-9be4-e0d55e81d6d7": {
+            "quantity": 1,
+            "selection": 0,
+            "cells": [
+              {
+                "id": "S3_09-A-08",
+                "quantity": 1,
+                "selection": 0
+              }
+            ]
+          }
+        },
+        "name": "ZM744",
+        "description": "Электромагнит BO 12V"
+      },
+      "4bf46d7a-bd08-11e0-810f-0025117f92fc": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "CG",
+        "name": "130301",
+        "description": "Электромагнит BO 12V"
+      },
+      "de0ddd8c-bd13-11e0-810f-0025117f92fc": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "ERA S.P.A.",
+        "name": "ZM544",
+        "description": "Электромагнит BO 12V"
+      },
+      "67626815-8c72-11e2-9a58-1c6f65f84a63": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "ERA S.P.A.",
+        "name": "ZM544C",
+        "description": "Электромагнит BO 12V"
+      },
+      "7516b4c2-bd15-11e0-810f-0025117f92fc": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "ERA S.P.A.",
+        "name": "ZM744",
+        "description": "Электромагнит BO 12V"
+      },
+      "1c10e222-8c73-11e2-9a58-1c6f65f84a63": {
+        "quantity": 0,
+        "selection": 0,
+        "char": "ERA S.P.A.",
+        "name": "ZM744C",
+        "description": "Электромагнит BO 12V"
+      }
     }
-  ]
+  }
 }

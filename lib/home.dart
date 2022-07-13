@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:go_router/go_router.dart";
 import 'package:test_flutter/search/search.dart';
 import 'package:test_flutter/sku_info/sku.dart';
+import 'package:test_flutter/sku_info/sku_cubit.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -57,7 +58,9 @@ class SearchTable extends StatelessWidget {
             return ListTile(
               enabled: true,
               title: Text(state.result[index].sku),
-              onTap: () {},
+              onTap: () {
+                context.read<SkuCubit>().showSkuInfo(state.result[index].sku);
+              },
             );
           },
         );

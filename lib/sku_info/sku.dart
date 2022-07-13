@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:test_flutter/sku_info/overlay/overlay.dart';
 import 'package:test_flutter/sku_info/sku_cubit.dart';
+import 'package:test_flutter/sku_info/sku_info.dart';
 
 class SkuInfoView extends StatelessWidget {
   SkuInfoView({super.key});
@@ -16,7 +18,11 @@ class SkuInfoView extends StatelessWidget {
       children: [
         BlocBuilder<SkuCubit, SkuInfo>(
           builder: (context, state) {
-            if (state.entries.isEmpty) {
+            if (state.state == InfoState.error) {
+              return const Center(child: Text("error"));
+            }
+
+            if (state.state == InfoState.loading) {
               return const Center(child: CircularProgressIndicator());
             }
 
@@ -47,20 +53,26 @@ class MyTableFloat extends StatelessWidget {
         TableRow(children: [
           const TextCell("Товар"),
           const TextCell("Цена"),
-          ..._skuInfo.warehouses.map((w) => TextCell(w.name)).toList(),
+          ..._skuInfo.warehouses.map((v) => TextCell(v.name)).toList(),
         ]),
-        ..._skuInfo.entries.map((entry) {
+        ..._skuInfo.entries.entries.map((entry) {
           return TableRow(
             children: [
-              ProductCell(entry.name, entry.characteristic, entry.description),
-              TextCell('${entry.price} руб.'),
+              ProductCell(
+                entry.value.name,
+                entry.value.characteristic,
+                entry.value.description,
+              ),
+              TextCell('todo :руб.'),
               ..._skuInfo.warehouses.map((w) {
-                final a = entry.warehouses[w.id];
-                if (a == null) {
+                final wh = entry.value.warehouses;
+                if (wh == null || wh.isEmpty) {
                   return const TextCell("");
                 }
 
-                return WarehouseCell(a.quantity);
+                Logger().d(w, wh[w]);
+
+                return WarehouseCell(wh[w]!);
               }).toList(),
             ],
           );
@@ -118,10 +130,10 @@ class ProductCell extends StatelessWidget {
 }
 
 class WarehouseCell extends StatelessWidget {
-  WarehouseCell(this._quantity, {super.key});
+  WarehouseCell(this._whCell, {super.key});
 
   final _key = GlobalKey();
-  final double _quantity;
+  final WarehouseEntry _whCell;
 
   @override
   Widget build(BuildContext context) {
@@ -130,13 +142,16 @@ class WarehouseCell extends StatelessWidget {
       cursor: SystemMouseCursors.help,
       onEnter: (event) {
         // Logger().d("hover!");
-        context.read<OverlayCubit>().showOverlay(_key);
+
+        context.read<OverlayCubit>().showOverlay(
+              CellOverlay(_key, _whCell.cells),
+            );
       },
       onExit: (event) {
         // Logger().d("unhover!");
-        context.read<OverlayCubit>().showOverlay(GlobalKey());
+        context.read<OverlayCubit>().showOverlay(null);
       },
-      child: TextCell('$_quantity шт.'),
+      child: TextCell('${_whCell.quantity} шт.'),
     );
   }
 }

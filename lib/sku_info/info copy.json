@@ -1,0 +1,97 @@
+{
+  "sku": "cs125",
+  "warehouses": [
+    { "id": "1", "name": "Новая станция" },
+    { "id": "2", "name": "Старая станция" }
+  ],
+
+  
+
+
+  "by_warehouse": {
+
+  },
+    {
+      "sku": "cs125",
+      "warehouse": "1",
+      "quantity": "10"
+    },
+    {
+      "sku": "cs125",
+      "warehouse": "2",
+      "quantity": "20"
+    }
+  ],
+    "charID": {
+
+    },
+    "1": {
+      "sku": "cs125",
+      "warehouse": "1",
+      "quantity": "10"
+    },
+    "2": {
+      "sku": "cs125",
+      "warehouse": "2",
+      "quantity": "10"
+    }
+  },
+
+  "by_cells": {
+    "1": {
+      "sku": "cs125",
+      "warehouse": "1",
+      "cell": "1",
+      "quantity": "10"
+    },
+    "2": {
+      "sku": "cs125",
+      "warehouse": "2",
+      "cell": "1",
+      "quantity": "10"
+    }
+  },
+
+  "entries": [
+    {
+      "name": "js125",
+      "char": "RG",
+      "description": "description",
+      "price": "100",
+
+      "warehouses": [
+        {
+          "id": "1",
+          "quantity": "10",
+          "cells": [
+            { "id": "N2_1", "quantity": "1" },
+            { "id": "N2_2", "quantity": "9" }
+          ]
+        },
+        {
+          "id": "2",
+          "quantity": "5",
+          "cells": [{ "id": "S2_1", "quantity": "5" }]
+        }
+      ]
+    },
+
+    {
+      "name": "js126",
+      "char": "RG",
+      "description": "description",
+      "price": "100",
+
+      "warehouses": [
+        {
+          "id": "1",
+          "quantity": "10",
+          "cells": [
+            { "id": "N2_1", "quantity": "1" },
+            { "id": "N2_2", "quantity": "9" }
+          ]
+        }
+      ]
+    }
+  ]
+}

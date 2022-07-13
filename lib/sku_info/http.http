@@ -1,9 +1,12 @@
 @basic = Basic QVBJOjZPN0VIRFdTMFNrJHlaJWk4MHA1
 @host = http://10.51.0.10:19201/sm1/hs
 
-GET {{host}}/warehouse/sku/cs125
+GET {{host}}/warehouse/sku/130301
 Authorization: {{basic}}
 
 ### Hm
 GET http://localhost:8100/warehouse/sku/cs125
 Authorization: {{basic}}
+
+### Hm
+GET http://re-star.ru/oprox/warehouse/sku/CS1254

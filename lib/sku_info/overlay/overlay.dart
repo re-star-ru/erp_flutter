@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/sku_info/sku_info.dart';
 
-class OverlayCubit extends Cubit<Overlay> {
-  OverlayCubit() : super(Overlay(null));
+class OverlayCubit extends Cubit<CellOverlay?> {
+  OverlayCubit() : super(null);
 
-  showOverlay(GlobalKey key) {
-    emit(Overlay(key));
+  showOverlay(CellOverlay? overlay) {
+    emit(overlay);
   }
 }
 
-class Overlay {
-  Overlay(this._globalKey);
-  final GlobalKey? _globalKey;
+class CellOverlay {
+  CellOverlay(this._globalKey, this._entries);
+
+  final List<CellEntry> _entries;
+  final GlobalKey _globalKey;
 }
 
 class OverlayView extends StatelessWidget {
@@ -21,10 +24,11 @@ class OverlayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OverlayCubit, Overlay>(
+    return BlocBuilder<OverlayCubit, CellOverlay?>(
       builder: (context, state) {
-        if (state._globalKey == null) return Container();
-        return WarehouseInfoOverlay(_rootKey, state._globalKey!);
+        if (state == null) return Container();
+
+        return WarehouseInfoOverlay(_rootKey, state._globalKey, state._entries);
       },
       // buildWhen: (previous, current) {
       //   return current._globalKey != null;
@@ -34,10 +38,16 @@ class OverlayView extends StatelessWidget {
 }
 
 class WarehouseInfoOverlay extends StatelessWidget {
-  const WarehouseInfoOverlay(this._rootKey, this.pkey, {super.key});
+  const WarehouseInfoOverlay(
+    this._rootKey,
+    this.pkey,
+    this._entries, {
+    super.key,
+  });
 
   final GlobalKey _rootKey;
   final GlobalKey pkey;
+  final List<CellEntry> _entries;
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +85,8 @@ class WarehouseInfoOverlay extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
         child: Column(
-          children: const [
-            Text("N2_2-32-A | 1 шт."),
-            Text("N2_2-32-A | 1 шт."),
-          ],
+          children:
+              _entries.map((e) => Text("${e.id} | ${e.quantity}")).toList(),
         ),
       ),
     );
