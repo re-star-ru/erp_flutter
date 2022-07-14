@@ -48,14 +48,23 @@ class MyTableFloat extends StatelessWidget {
         0: FractionColumnWidth(0.3),
         1: FractionColumnWidth(0.2),
       },
-      border: TableBorder.all(color: Colors.black),
+      // border: TableBorder.all(color: Colors.black),
+      border: const TableBorder(
+        horizontalInside: BorderSide(color: Colors.blueGrey),
+      ),
       children: [
         TableRow(children: [
           const TextCell("Товар"),
           const TextCell("Цена"),
           ..._skuInfo.warehouses.map((v) => TextCell(v.name)).toList(),
         ]),
-        ..._skuInfo.entries.entries.map((entry) {
+        ...(_skuInfo.entries.entries.toList()
+              ..sort(
+                (a, b) {
+                  return (b.value.quantity - a.value.quantity).toInt();
+                },
+              ))
+            .map((entry) {
           return TableRow(
             children: [
               ProductCell(
@@ -70,13 +79,16 @@ class MyTableFloat extends StatelessWidget {
                   return const TextCell("");
                 }
 
-                Logger().d(w, wh[w]);
+                final cells = wh[w.id];
+                if (cells == null) {
+                  return const TextCell("");
+                }
 
-                return WarehouseCell(wh[w]!);
+                return WarehouseCell(cells);
               }).toList(),
             ],
           );
-        }).toList(),
+        }).toList()
       ],
     );
   }
