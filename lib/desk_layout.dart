@@ -1,5 +1,7 @@
+import 'package:auto_updater/auto_updater.dart';
 import 'package:flutter/material.dart';
 import "package:go_router/go_router.dart";
+import 'package:logger/logger.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout(this.child, {super.key});
@@ -37,6 +39,19 @@ class NavBar extends StatelessWidget {
         NavBtn(
           const Icon(Icons.receipt, color: Colors.black),
           () => context.go('/document'),
+        ),
+        const SizedBox(height: 30),
+        NavBtn(
+          const Icon(Icons.update, color: Colors.black),
+          () async {
+            Logger().i("Update button pressed");
+
+            String feed = 'http://localhost:5000/appcast.xml';
+            AutoUpdater.instance.setFeedURL(feed);
+            AutoUpdater.instance.checkForUpdates(inBackground: true);
+            // autoUpdater.setFeedURL(feed);
+            // awaut autoUpdater.checkForUpdates();
+          },
         ),
       ],
     );
