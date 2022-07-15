@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:test_flutter/barcode.dart';
 import 'package:test_flutter/desk_layout.dart';
 import 'package:test_flutter/home.dart';
+import 'package:test_flutter/repair/list/view.dart';
 import 'package:test_flutter/search/search.dart';
 import 'package:test_flutter/sku_info/overlay/overlay.dart';
 import 'package:test_flutter/sku_info/sku_cubit.dart';
@@ -73,12 +74,15 @@ class MyApp extends StatelessWidget {
 
   final _router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const MyAppPage()),
-      GoRoute(path: '/home', builder: (context, state) => Home()),
+      GoRoute(
+        path: '/',
+        builder: (context, state) => MyAppPage(Home()),
+      ),
+      GoRoute(
+        path: '/document',
+        builder: (context, state) => const MyAppPage(RepairListView()),
+      ),
     ],
-    // errorBuilder: (context, state) => Center(
-    //   child: Text('Error $state'),
-    // ),
   );
 
   @override
@@ -103,21 +107,16 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppPage extends StatelessWidget {
-  const MyAppPage({super.key});
+  const MyAppPage(this.body, {super.key});
+
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final size = getSize(context);
       if (size == ScreenSize.pc) {
-        // return const MyHomePageStateless(title: 'Barcode Focus Reader');
-        return Scaffold(
-          body: const MyBox(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => context.go('/home'),
-            child: const Icon(Icons.search_outlined),
-          ),
-        );
+        return Scaffold(body: DesktopLayout(body));
       }
 
       return const MyTabBar();
