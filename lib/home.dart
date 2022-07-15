@@ -14,30 +14,25 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => context.go("/"),
-          child: const Icon(Icons.close_outlined),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          flex: 2,
+          child: Column(
+            children: [
+              SearchInput(focus),
+              const Expanded(child: SearchTable())
+            ],
+          ),
         ),
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  SearchInput(focus),
-                  const Expanded(child: SearchTable())
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 10,
-              // child: const SkuInfoView(),
-              child: SkuInfoView(),
-            )
-          ],
-        ));
+        Expanded(
+          flex: 10,
+          // child: const SkuInfoView(),
+          child: SkuInfoView(),
+        )
+      ],
+    );
   }
 }
 

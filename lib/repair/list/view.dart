@@ -5,6 +5,23 @@ class RepairListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("kek");
+    return Column(
+      children: [
+        Text('Талон ремонта'),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: List.generate(
+                100,
+                (index) => Container(
+                  child: Text('$index'),
+                  width: double.infinity,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
