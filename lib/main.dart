@@ -8,6 +8,7 @@ import 'package:test_flutter/desk_layout.dart';
 import 'package:test_flutter/home.dart';
 import 'package:test_flutter/repair/list/view.dart';
 import 'package:test_flutter/search/search.dart';
+import 'package:test_flutter/settings/view.dart';
 import 'package:test_flutter/sku_info/overlay/overlay.dart';
 import 'package:test_flutter/sku_info/sku_cubit.dart';
 
@@ -30,6 +31,7 @@ class BlocMyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),
         BlocProvider<BarcodeCubit>(
           create: (context) => BarcodeCubit(),
         ),
@@ -77,6 +79,10 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/',
         builder: (context, state) => MyAppPage(Home()),
+      ),
+      GoRoute(
+        path: '/settings',
+        builder: (context, state) => MyAppPage(SettingsView()),
       ),
       GoRoute(
         path: '/document',

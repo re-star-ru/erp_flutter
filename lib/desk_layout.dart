@@ -45,13 +45,16 @@ class NavBar extends StatelessWidget {
           const Icon(Icons.update, color: Colors.black),
           () async {
             Logger().i("Update button pressed");
-
-            String feed = 'http://localhost:5000/appcast.xml';
-            AutoUpdater.instance.setFeedURL(feed);
-            AutoUpdater.instance.checkForUpdates(inBackground: true);
-            // autoUpdater.setFeedURL(feed);
-            // awaut autoUpdater.checkForUpdates();
           },
+        ),
+        const SizedBox(height: 10),
+        NavBtn(
+          const Icon(Icons.settings, color: Colors.black),
+          () => context.go('/settings'),
+        ),
+        NavBtn(
+          const Icon(Icons.chat_sharp, color: Colors.black),
+          () => context.go('/settings'),
         ),
       ],
     );
