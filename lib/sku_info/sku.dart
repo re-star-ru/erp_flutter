@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:test_flutter/sku_info/overlay/overlay.dart';
 import 'package:test_flutter/sku_info/sku_cubit.dart';
 import 'package:test_flutter/sku_info/sku_info.dart';
@@ -72,7 +71,7 @@ class MyTableFloat extends StatelessWidget {
                 entry.value.characteristic,
                 entry.value.description,
               ),
-              TextCell('todo :руб.'),
+              const TextCell('todo :руб.'),
               ..._skuInfo.warehouses.map((w) {
                 final wh = entry.value.warehouses;
                 if (wh == null || wh.isEmpty) {

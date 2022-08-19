@@ -7,15 +7,15 @@ class RepairListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Талон ремонта'),
+        const Text('Талон ремонта'),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
               children: List.generate(
                 100,
-                (index) => Container(
-                  child: Text('$index'),
+                (index) => SizedBox(
                   width: double.infinity,
+                  child: Text('$index'),
                 ),
               ),
             ),

@@ -10,7 +10,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       key: _key,
-      children: [Text("CONFIGS")],
+      children: const [Text("CONFIGS")],
     );
   }
 }
