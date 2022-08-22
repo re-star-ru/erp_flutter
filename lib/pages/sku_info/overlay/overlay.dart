@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/sku_info/sku_info.dart';
+import 'package:test_flutter/pages/sku_info/sku_info.dart';
 
 class OverlayCubit extends Cubit<CellOverlay?> {
   OverlayCubit() : super(null);

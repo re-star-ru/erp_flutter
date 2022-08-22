@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_flutter/barcode.dart';
+import 'package:test_flutter/components/barcode.dart';
 import 'package:test_flutter/desk_layout.dart';
 import 'package:test_flutter/home.dart';
-import 'package:test_flutter/repair/list/view.dart';
-import 'package:test_flutter/search/search.dart';
-import 'package:test_flutter/settings/view.dart';
-import 'package:test_flutter/sku_info/overlay/overlay.dart';
-import 'package:test_flutter/sku_info/sku_cubit.dart';
+import 'package:test_flutter/pages/repair/list/view.dart';
+import 'package:test_flutter/repo/search/search.dart';
+import 'package:test_flutter/pages/settings/view.dart';
+import 'package:test_flutter/pages/sku_info/overlay/overlay.dart';
+import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
 void main() {
   runApp(const BlocMyApp());

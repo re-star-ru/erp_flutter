@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import 'package:test_flutter/sku_info/sku_info.dart';
+import 'package:test_flutter/pages/sku_info/sku_info.dart';
 
 class SkuCubit extends Cubit<SkuInfo> {
   SkuCubit() : super(SkuInfo("", [], {}));

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_flutter/search/search.dart';
-import 'package:test_flutter/sku_info/sku.dart';
-import 'package:test_flutter/sku_info/sku_cubit.dart';
+import 'package:test_flutter/repo/search/search.dart';
+import 'package:test_flutter/pages/sku_info/sku.dart';
+import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
