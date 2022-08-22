@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:go_router/go_router.dart";
 import 'package:logger/logger.dart';
+import 'package:test_flutter/components/nav_button.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout(this.child, {super.key});
@@ -56,29 +57,6 @@ class NavBar extends StatelessWidget {
           () => context.go('/settings'),
         ),
       ],
-    );
-  }
-}
-
-class NavBtn extends StatelessWidget {
-  const NavBtn(this.icon, this.onPressed, {super.key});
-
-  final Icon icon;
-  final void Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: TextButton.styleFrom(
-        backgroundColor: Colors.grey[100],
-        shape: const BeveledRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        padding: const EdgeInsets.all(8),
-        minimumSize: const Size(60, 60),
-      ),
-      child: icon,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,4 +64,24 @@ class BarcodeState {
   final BarcodeStatus status;
   final String text;
   final Duration timeStamp;
+}
+
+class BarcodeText extends StatelessWidget {
+  const BarcodeText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<BarcodeCubit, BarcodeState>(
+      builder: (context, state) {
+        return Text(state.text);
+      },
+      buildWhen: ((prev, curr) {
+        if (curr.status == BarcodeStatus.end) {
+          return true;
+        }
+
+        return false;
+      }),
+    );
+  }
 }
