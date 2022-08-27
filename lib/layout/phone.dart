@@ -1,65 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:test_flutter/components/nav_button.dart';
-import 'package:test_flutter/layout/desktop.dart';
 import "package:go_router/go_router.dart";
 
-class MyTabBar extends StatelessWidget {
-  const MyTabBar({super.key});
+class PhoneLayout extends StatelessWidget {
+  const PhoneLayout(this.child, {super.key});
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        NavBtn(
-          const Icon(Icons.search, color: Colors.black),
-          () => context.go('/'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            NavBtn(
+              const Icon(Icons.search, color: Colors.black),
+              () => context.go('/'),
+            ),
+            const SizedBox(width: 10),
+            NavBtn(
+              const Icon(Icons.receipt, color: Colors.black),
+              () => context.go('/repair'),
+            ),
+            const SizedBox(width: 10),
+            NavBtn(
+              const Icon(Icons.settings, color: Colors.black),
+              () => context.go('/settings'),
+            ),
+          ],
         ),
-        const SizedBox(height: 10),
-        NavBtn(
-          const Icon(Icons.receipt, color: Colors.black),
-          () => context.go('/document'),
-        ),
-        const SizedBox(height: 30),
-        NavBtn(
-          const Icon(Icons.update, color: Colors.black),
-          () async {
-            // Logger().i("Update button pressed");
-          },
-        ),
+        Text("WTF"),
       ],
     );
   }
 }
-
-
-
-// return const DefaultTabController(
-//       initialIndex: 1,
-//       length: 3,
-//       child: Scaffold(
-//         appBar: TabBar(
-//           labelColor: Colors.brown,
-//           indicatorColor: Colors.black,
-//           tabs: [
-//             Tab(icon: Icon(Icons.search)),
-//             Tab(icon: Icon(Icons.receipt)),
-//             Tab(icon: Icon(Icons.settings)),
-//           ],
-//         ),
-//         body: TabBarView(
-//           children: [
-//             Center(
-//               child: Text("It's cloudy here"),
-//             ),
-//             Center(
-//               child: Text("It's rainy here"),
-//             ),
-//             Center(
-//               child: Text("It's sunny here"),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );

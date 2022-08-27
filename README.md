@@ -1,5 +1,16 @@
 # test_flutter
 
+colors palette
+
+https://coolors.co/palette/000000-14213d-fca311-e5e5e5-ffffff
+
+000000
+14213D
+FCA311
+E5E5E5
+FFFFFF
+
+
 A new Flutter project.
 
 ## Getting Started

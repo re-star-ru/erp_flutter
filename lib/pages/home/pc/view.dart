@@ -1,13 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_flutter/components/debouncer.dart';
 import 'package:test_flutter/repo/search/search.dart';
 import 'package:test_flutter/pages/sku_info/sku.dart';
 import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class HomePC extends StatelessWidget {
+  HomePC({super.key});
 
   final focus = FocusNode();
 
@@ -88,17 +87,5 @@ class SearchInput extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class Debouncer {
-  final int milliseconds;
-  Timer? _timer;
-
-  Debouncer({required this.milliseconds});
-
-  run(VoidCallback action) {
-    _timer?.cancel();
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
   }
 }

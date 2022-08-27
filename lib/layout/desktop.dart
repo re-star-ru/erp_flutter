@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import "package:go_router/go_router.dart";
-import 'package:logger/logger.dart';
 import 'package:test_flutter/components/nav_button.dart';
 
 class DesktopLayout extends StatelessWidget {
@@ -14,7 +13,7 @@ class DesktopLayout extends StatelessWidget {
       children: [
         Container(
           width: 60,
-          color: Colors.amber.shade100,
+          color: const Color(0xff14213D),
           child: const NavBar(),
         ),
         Expanded(child: child),
@@ -26,34 +25,35 @@ class DesktopLayout extends StatelessWidget {
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
+  static const bntColor = Color(0xFF14213D);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         NavBtn(
-          const Icon(Icons.search, color: Colors.black),
+          const Icon(Icons.search, color: bntColor),
           () => context.go('/'),
         ),
         const SizedBox(height: 10),
         NavBtn(
-          const Icon(Icons.receipt, color: Colors.black),
-          () => context.go('/document'),
-        ),
-        const SizedBox(height: 30),
-        NavBtn(
-          const Icon(Icons.update, color: Colors.black),
-          () async {
-            Logger().i("Update button pressed");
-          },
+          const Icon(Icons.receipt, color: bntColor),
+          () => context.go('/repair'),
         ),
         const SizedBox(height: 10),
         NavBtn(
-          const Icon(Icons.settings, color: Colors.black),
+          const Icon(Icons.update, color: bntColor),
+          () async {},
+        ),
+        const SizedBox(height: 10),
+        NavBtn(
+          const Icon(Icons.settings, color: bntColor),
           () => context.go('/settings'),
         ),
+        const SizedBox(height: 10),
         NavBtn(
-          const Icon(Icons.chat_sharp, color: Colors.black),
+          const Icon(Icons.chat_sharp, color: bntColor),
           () => context.go('/settings'),
         ),
       ],

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class RepairListViewPC extends StatelessWidget {
-  const RepairListViewPC({super.key});
+class RepairListViewPhone extends StatelessWidget {
+  const RepairListViewPhone({super.key});
 
   @override
   Widget build(BuildContext context) {

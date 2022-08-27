@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/gestures.dart';
-import 'package:test_flutter/home.dart';
 import 'package:test_flutter/layout/desktop.dart';
 import 'package:test_flutter/layout/phone.dart';
-import 'package:test_flutter/pages/repair/pc/list/view.dart';
-import 'package:test_flutter/pages/settings/view.dart';
+import 'package:test_flutter/pages/home/index.dart';
+import 'package:test_flutter/pages/repair/index.dart';
+import 'package:test_flutter/pages/settings/index.dart';
+import 'components/layout.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition({
   required BuildContext context,
@@ -25,9 +26,9 @@ class LayoutRouter extends StatelessWidget {
 
   final _router = GoRouter(
     routes: [
-      _goRoute('/', Home()),
-      _goRoute('/settings', SettingsView()),
-      _goRoute('/document', const RepairListView())
+      _goRoute('/', HomeSelector()),
+      _goRoute('/repair', RepairListSelector()),
+      _goRoute('/settings', SettingsSelector()),
     ],
   );
 
@@ -52,15 +53,12 @@ class LayoutRouter extends StatelessWidget {
       );
 }
 
-GoRoute _goRoute(
-  String path,
-  Widget body,
-) {
+GoRoute _goRoute(String path, LayoutSelector selector) {
   return GoRoute(
     path: path,
     pageBuilder: (context, state) => CustomTransitionPage<void>(
       key: state.pageKey,
-      child: LayoutPage(body),
+      child: LayoutPage(selector),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(opacity: animation, child: child),
     ),
@@ -68,27 +66,19 @@ GoRoute _goRoute(
 }
 
 class LayoutPage extends StatelessWidget {
-  const LayoutPage(this.body, {super.key});
+  const LayoutPage(this.selector, {super.key});
 
-  final Widget body;
+  final LayoutSelector selector;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final size = getSize(context);
       if (size == ScreenSize.pc) {
-        return Scaffold(body: DesktopLayout(body));
+        return Scaffold(body: DesktopLayout(selector.pc()));
       }
 
-      return const Scaffold(body: MyTabBar());
+      return Scaffold(body: PhoneLayout(selector.phone()));
     });
   }
-}
-
-enum ScreenSize { phone, pc }
-
-ScreenSize getSize(BuildContext context) {
-  double deviceWidth = MediaQuery.of(context).size.shortestSide;
-  if (deviceWidth > 600) return ScreenSize.pc;
-  return ScreenSize.phone;
 }

@@ -11,7 +11,7 @@ class NavBtn extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: const Color(0xFFE5E5E5),
         shape: const BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
