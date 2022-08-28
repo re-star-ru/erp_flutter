@@ -11,26 +11,41 @@ class PhoneLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            NavBtn(
-              const Icon(Icons.search, color: Colors.black),
-              () => context.go('/'),
-            ),
-            const SizedBox(width: 10),
-            NavBtn(
-              const Icon(Icons.receipt, color: Colors.black),
-              () => context.go('/repair'),
-            ),
-            const SizedBox(width: 10),
-            NavBtn(
-              const Icon(Icons.settings, color: Colors.black),
-              () => context.go('/settings'),
-            ),
-          ],
+        Expanded(child: child),
+        Container(
+          height: 60,
+          color: const Color(0xff14213D),
+          child: const NavBar(),
         ),
-        Text("WTF"),
+      ],
+    );
+  }
+}
+
+class NavBar extends StatelessWidget {
+  const NavBar({super.key});
+
+  static const bntColor = Color(0xFF14213D);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        NavBtn(
+          const Icon(Icons.receipt, color: Colors.black),
+          () => context.go('/repair'),
+        ),
+        const SizedBox(width: 10),
+        NavBtn(
+          const Icon(Icons.search, color: Colors.black),
+          () => context.go('/'),
+        ),
+        const SizedBox(width: 10),
+        NavBtn(
+          const Icon(Icons.settings, color: Colors.black),
+          () => context.go('/settings'),
+        ),
       ],
     );
   }
