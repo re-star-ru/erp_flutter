@@ -27,7 +27,8 @@ class LayoutRouter extends StatelessWidget {
   final _router = GoRouter(
     routes: [
       _goRoute('/', HomeSelector()),
-      _goRoute('/repair', RepairListSelector()),
+      _goRoute('/repair', RepairListSelector()), // repair list
+      _goRoute('/repair/:id', RepairSelector()),
       _goRoute('/settings', SettingsSelector()),
     ],
   );
@@ -58,7 +59,10 @@ GoRoute _goRoute(String path, LayoutSelector selector) {
     path: path,
     pageBuilder: (context, state) => CustomTransitionPage<void>(
       key: state.pageKey,
-      child: LayoutPage(selector),
+      child: Builder(builder: (context) {
+        final id = state.params['id'];
+        return LayoutPage(selector, id: id);
+      }),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(opacity: animation, child: child),
     ),
@@ -66,8 +70,9 @@ GoRoute _goRoute(String path, LayoutSelector selector) {
 }
 
 class LayoutPage extends StatelessWidget {
-  const LayoutPage(this.selector, {super.key});
+  const LayoutPage(this.selector, {super.key, this.id});
 
+  final String? id;
   final LayoutSelector selector;
 
   @override
@@ -75,10 +80,10 @@ class LayoutPage extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       final size = getSize(context);
       if (size == ScreenSize.pc) {
-        return Scaffold(body: DesktopLayout(selector.pc()));
+        return Scaffold(body: DesktopLayout(selector.pc(id: id)));
       }
 
-      return Scaffold(body: PhoneLayout(selector.phone()));
+      return Scaffold(body: PhoneLayout(selector.phone(id: id)));
     });
   }
 }

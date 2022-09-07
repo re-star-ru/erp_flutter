@@ -4,12 +4,12 @@ import 'package:test_flutter/pages/home/phone/view.dart';
 
 class HomeSelector extends LayoutSelector {
   @override
-  pc() {
+  pc({String? id}) {
     return HomePC();
   }
 
   @override
-  phone() {
+  phone({String? id}) {
     return HomePhone();
   }
 }
