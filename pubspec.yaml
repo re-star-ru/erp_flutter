@@ -44,6 +44,7 @@ dependencies:
   new_version: ^0.3.1
   upgrader: ^4.4.0
   auto_updater: ^0.1.5
+  grpc: ^3.0.2
 
 dev_dependencies:
   flutter_test:
