@@ -21,6 +21,20 @@ CustomTransitionPage buildPageWithDefaultTransition({
   );
 }
 
+const rcolor = MaterialColor(0xff14213D, color);
+const Map<int, Color> color = {
+  50: Color.fromRGBO(20, 33, 61, .1),
+  100: Color.fromRGBO(20, 33, 61, .2),
+  200: Color.fromRGBO(20, 33, 61, .3),
+  300: Color.fromRGBO(20, 33, 61, .4),
+  400: Color.fromRGBO(20, 33, 61, .5),
+  500: Color.fromRGBO(20, 33, 61, .6),
+  600: Color.fromRGBO(20, 33, 61, .7),
+  700: Color.fromRGBO(20, 33, 61, .8),
+  800: Color.fromRGBO(20, 33, 61, .9),
+  900: Color.fromRGBO(20, 33, 61, 1),
+};
+
 class LayoutRouter extends StatelessWidget {
   LayoutRouter({super.key});
 
@@ -35,13 +49,13 @@ class LayoutRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
+        themeMode: ThemeMode.dark,
         theme: ThemeData(
           useMaterial3: true,
-          textTheme: Theme.of(context).textTheme.apply(
-                fontSizeFactor: 1.05,
-                fontSizeDelta: 1.5,
-              ),
+          brightness: Brightness.light,
+          primarySwatch: rcolor,
         ),
+        darkTheme: ThemeData.dark(useMaterial3: true),
         scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: {
           PointerDeviceKind.mouse,
           PointerDeviceKind.touch,

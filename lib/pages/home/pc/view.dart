@@ -24,6 +24,10 @@ class HomePC extends StatelessWidget {
             ],
           ),
         ),
+        Container(
+          width: 8.0,
+          color: Theme.of(context).colorScheme.background,
+        ),
         Expanded(
           flex: 10,
           // child: const SkuInfoView(),
@@ -50,7 +54,10 @@ class SearchTable extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               enabled: true,
-              title: Text(state.result[index].sku),
+              title: Text(
+                state.result[index].sku,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
               onTap: () {
                 context.read<SkuCubit>().showSkuInfo(state.result[index].sku);
               },

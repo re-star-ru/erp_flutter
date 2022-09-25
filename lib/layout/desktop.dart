@@ -13,10 +13,19 @@ class DesktopLayout extends StatelessWidget {
       children: [
         Container(
           width: 60,
-          color: const Color(0xff14213D),
           child: const NavBar(),
         ),
-        Expanded(child: child),
+        Expanded(
+          child: Container(
+            color: Theme.of(context).colorScheme.background,
+            padding: const EdgeInsets.all(8.0),
+            child: Material(
+              elevation: 8.0,
+              color: Theme.of(context).colorScheme.surface,
+              child: child,
+            ),
+          ),
+        ),
       ],
     );
   }
