@@ -17,11 +17,14 @@ class HomePC extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: Column(
-            children: [
-              SearchInput(focus),
-              const Expanded(child: SearchTable())
-            ],
+          child: Material(
+            elevation: 8.0,
+            child: Column(
+              children: [
+                SearchInput(focus),
+                const Expanded(child: SearchTable())
+              ],
+            ),
           ),
         ),
         Container(
@@ -31,7 +34,11 @@ class HomePC extends StatelessWidget {
         Expanded(
           flex: 10,
           // child: const SkuInfoView(),
-          child: SkuInfoView(),
+          child: Material(
+            type: MaterialType.canvas,
+            elevation: 8.0,
+            child: SkuInfoView(),
+          ),
         )
       ],
     );

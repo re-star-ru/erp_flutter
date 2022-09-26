@@ -20,7 +20,6 @@ class DesktopLayout extends StatelessWidget {
             color: Theme.of(context).colorScheme.background,
             padding: const EdgeInsets.all(8.0),
             child: Material(
-              elevation: 8.0,
               color: Theme.of(context).colorScheme.surface,
               child: child,
             ),
