@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:go_router/go_router.dart";
 import 'package:test_flutter/components/nav_button.dart';
+import 'package:test_flutter/components/theme.dart';
+import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout(this.child, {super.key});
@@ -63,6 +66,13 @@ class NavBar extends StatelessWidget {
         NavBtn(
           const Icon(Icons.chat_sharp, color: bntColor),
           () => context.go('/settings'),
+        ),
+        const SizedBox(height: 10),
+        NavBtn(
+          const Icon(Icons.dark_mode, color: bntColor),
+          () {
+            context.read<DarkThemeCubit>().toggle();
+          },
         ),
       ],
     );

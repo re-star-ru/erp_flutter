@@ -46,6 +46,7 @@ dependencies:
   auto_updater: ^0.1.5
   grpc: ^3.0.2
   intl: ^0.17.0
+  flash: ^2.0.5
 
 dev_dependencies:
   flutter_test:

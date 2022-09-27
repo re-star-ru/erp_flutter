@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/gestures.dart';
+import 'package:test_flutter/components/theme.dart';
 import 'package:test_flutter/layout/desktop.dart';
 import 'package:test_flutter/layout/phone.dart';
 import 'package:test_flutter/pages/home/index.dart';
@@ -48,8 +50,12 @@ class LayoutRouter extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        themeMode: ThemeMode.dark,
+  Widget build(BuildContext context) {
+    return BlocBuilder<DarkThemeCubit, bool>(builder: (context, state) {
+      return MaterialApp.router(
+        themeMode: context.read<DarkThemeCubit>().state
+            ? ThemeMode.dark
+            : ThemeMode.light,
         theme: ThemeData(
           useMaterial3: true,
           brightness: Brightness.light,
@@ -66,6 +72,8 @@ class LayoutRouter extends StatelessWidget {
         routeInformationParser: _router.routeInformationParser,
         routerDelegate: _router.routerDelegate,
       );
+    });
+  }
 }
 
 GoRoute _goRoute(String path, LayoutSelector selector) {

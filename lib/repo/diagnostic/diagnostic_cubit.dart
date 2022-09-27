@@ -19,10 +19,10 @@ class DiagnosticListCubit extends Cubit<DiagnosticList> {
   Future<void> list() async {
     emit(DiagnosticList(NetworkState.loading, state.diagnosticList));
 
-    final client = DiagnosticServiceClient(_channel);
-    final name = await client.list(Empty());
-
     try {
+      final client = DiagnosticServiceClient(_channel);
+      final name = await client.list(Empty());
+
       // delay imitation
       await Future.delayed(const Duration(seconds: 1));
 
@@ -40,6 +40,7 @@ class DiagnosticListCubit extends Cubit<DiagnosticList> {
       emit(DiagnosticList(NetworkState.done, dl));
     } catch (e) {
       Logger().e(e);
+      emit(DiagnosticList(NetworkState.error, state.diagnosticList));
     }
   }
 }

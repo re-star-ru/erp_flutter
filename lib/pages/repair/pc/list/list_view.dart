@@ -1,3 +1,4 @@
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,11 +22,12 @@ class RepairListViewPC extends StatelessWidget {
         ),
         Expanded(
           child: SingleChildScrollView(
-            child: Builder(
-              builder: (context) {
-                final state = context.watch<DiagnosticListCubit>().state;
-
+            child: BlocBuilder<DiagnosticListCubit, DiagnosticList>(
+              builder: (context, state) {
                 if (state.state == NetworkState.error) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                    context.showErrorBar(content: const Text("Network error"));
+                  });
                   return const Text("Error");
                 }
 
