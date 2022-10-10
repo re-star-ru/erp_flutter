@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:go_router/go_router.dart";
 import 'package:test_flutter/components/nav_button.dart';
 import 'package:test_flutter/components/theme.dart';
-import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout(this.child, {super.key});
@@ -14,9 +13,9 @@ class DesktopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
+        const SizedBox(
           width: 60,
-          child: const NavBar(),
+          child: NavBar(),
         ),
         Expanded(
           child: Container(

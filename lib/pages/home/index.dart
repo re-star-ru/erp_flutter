@@ -1,6 +1,6 @@
 import 'package:test_flutter/components/layout.dart';
-import 'package:test_flutter/pages/home/pc/view.dart';
-import 'package:test_flutter/pages/home/phone/view.dart';
+import 'package:test_flutter/pages/home/pc_view.dart';
+import 'package:test_flutter/pages/home/phone_view.dart';
 
 class HomeSelector extends LayoutSelector {
   @override

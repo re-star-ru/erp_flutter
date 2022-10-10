@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/components/debouncer.dart';
 import 'package:test_flutter/repo/search/search.dart';
-import 'package:test_flutter/pages/sku_info/sku.dart';
+import 'package:test_flutter/pages/sku_info/sku_pc_view.dart';
 import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
 class HomePhone extends StatelessWidget {
