@@ -1,3 +1,6 @@
+run:
+	flutter run -d linux
+
 generate:
 	protoc \
 		-I../restar/api/proto/v1 \

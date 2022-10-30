@@ -10,12 +10,12 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class Item_ItemType extends $pb.ProtobufEnum {
-  static const Item_ItemType ITEM_TYPE_UNKNOWN = Item_ItemType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ITEM_TYPE_UNKNOWN');
+  static const Item_ItemType ITEM_TYPE_UNSPECIFIED = Item_ItemType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ITEM_TYPE_UNSPECIFIED');
   static const Item_ItemType ITEM_TYPE_PRODUCT = Item_ItemType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ITEM_TYPE_PRODUCT');
   static const Item_ItemType ITEM_TYPE_SERVICE = Item_ItemType._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ITEM_TYPE_SERVICE');
 
   static const $core.List<Item_ItemType> values = <Item_ItemType> [
-    ITEM_TYPE_UNKNOWN,
+    ITEM_TYPE_UNSPECIFIED,
     ITEM_TYPE_PRODUCT,
     ITEM_TYPE_SERVICE,
   ];

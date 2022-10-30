@@ -94,7 +94,7 @@ class Image extends $pb.GeneratedMessage {
 class Item extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Item', createEmptyInstance: create)
     ..aInt64(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
-    ..e<Item_ItemType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'itemType', $pb.PbFieldType.OE, protoName: 'itemType', defaultOrMaker: Item_ItemType.ITEM_TYPE_UNKNOWN, valueOf: Item_ItemType.valueOf, enumValues: Item_ItemType.values)
+    ..e<Item_ItemType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'itemType', $pb.PbFieldType.OE, defaultOrMaker: Item_ItemType.ITEM_TYPE_UNSPECIFIED, valueOf: Item_ItemType.valueOf, enumValues: Item_ItemType.values)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..hasRequiredFields = false
   ;
@@ -170,10 +170,10 @@ class Diagnostic extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Diagnostic', createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'version', $pb.PbFieldType.OU3)
-    ..aOM<$3.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', protoName: 'createdAt', subBuilder: $3.Timestamp.create)
-    ..aOM<$3.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', protoName: 'updatedAt', subBuilder: $3.Timestamp.create)
-    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'definedNumber', protoName: 'definedNumber')
-    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'SKU', protoName: 'SKU')
+    ..aOM<$3.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $3.Timestamp.create)
+    ..aOM<$3.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $3.Timestamp.create)
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'definedNumber')
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sku')
     ..pc<Item>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'items', $pb.PbFieldType.PM, subBuilder: Item.create)
     ..pc<Image>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: Image.create)
     ..hasRequiredFields = false
@@ -186,7 +186,7 @@ class Diagnostic extends $pb.GeneratedMessage {
     $3.Timestamp? createdAt,
     $3.Timestamp? updatedAt,
     $core.String? definedNumber,
-    $core.String? sKU,
+    $core.String? sku,
     $core.Iterable<Item>? items,
     $core.Iterable<Image>? images,
   }) {
@@ -206,8 +206,8 @@ class Diagnostic extends $pb.GeneratedMessage {
     if (definedNumber != null) {
       _result.definedNumber = definedNumber;
     }
-    if (sKU != null) {
-      _result.sKU = sKU;
+    if (sku != null) {
+      _result.sku = sku;
     }
     if (items != null) {
       _result.items.addAll(items);
@@ -288,13 +288,13 @@ class Diagnostic extends $pb.GeneratedMessage {
   void clearDefinedNumber() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get sKU => $_getSZ(5);
+  $core.String get sku => $_getSZ(5);
   @$pb.TagNumber(6)
-  set sKU($core.String v) { $_setString(5, v); }
+  set sku($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasSKU() => $_has(5);
+  $core.bool hasSku() => $_has(5);
   @$pb.TagNumber(6)
-  void clearSKU() => clearField(6);
+  void clearSku() => clearField(6);
 
   @$pb.TagNumber(7)
   $core.List<Item> get items => $_getList(6);
@@ -305,17 +305,17 @@ class Diagnostic extends $pb.GeneratedMessage {
 
 class DiagnosticList extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DiagnosticList', createEmptyInstance: create)
-    ..pc<Diagnostic>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'list', $pb.PbFieldType.PM, subBuilder: Diagnostic.create)
+    ..pc<Diagnostic>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lists', $pb.PbFieldType.PM, subBuilder: Diagnostic.create)
     ..hasRequiredFields = false
   ;
 
   DiagnosticList._() : super();
   factory DiagnosticList({
-    $core.Iterable<Diagnostic>? list,
+    $core.Iterable<Diagnostic>? lists,
   }) {
     final _result = create();
-    if (list != null) {
-      _result.list.addAll(list);
+    if (lists != null) {
+      _result.lists.addAll(lists);
     }
     return _result;
   }
@@ -341,6 +341,53 @@ class DiagnosticList extends $pb.GeneratedMessage {
   static DiagnosticList? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<Diagnostic> get list => $_getList(0);
+  $core.List<Diagnostic> get lists => $_getList(0);
+}
+
+class ID extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ID', createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ID._() : super();
+  factory ID({
+    $fixnum.Int64? id,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    return _result;
+  }
+  factory ID.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ID.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ID clone() => ID()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ID copyWith(void Function(ID) updates) => super.copyWith((message) => updates(message as ID)) as ID; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ID create() => ID._();
+  ID createEmptyInstance() => create();
+  static $pb.PbList<ID> createRepeated() => $pb.PbList<ID>();
+  @$core.pragma('dart2js:noInline')
+  static ID getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ID>(create);
+  static ID? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
 }
 

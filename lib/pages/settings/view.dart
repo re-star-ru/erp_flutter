@@ -8,10 +8,15 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      key: _key,
-      children: const [Text("CONFIGS")],
-    );
+    return BlocBuilder<SettingsCubit, Settings>(builder: (_, settings) {
+      return Column(
+        key: _key,
+        children: [
+          const Text("CONFIGS"),
+          ListTile(dense: true, leading: Text("server: ${settings.basepath}")),
+        ],
+      );
+    });
   }
 }
 

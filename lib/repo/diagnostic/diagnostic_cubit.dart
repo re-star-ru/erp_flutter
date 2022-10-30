@@ -26,14 +26,14 @@ class DiagnosticListCubit extends Cubit<DiagnosticList> {
       // delay imitation
       await Future.delayed(const Duration(seconds: 1));
 
-      final dl = name.list.map((e) {
+      final dl = name.lists.map((e) {
         return Diagnostic(
           e.id.toInt(),
           e.version.toInt(),
           e.createdAt.toDateTime().toLocal(),
           e.updatedAt.toDateTime().toLocal(),
           e.definedNumber,
-          e.sKU,
+          e.sku,
         );
       }).toList();
 

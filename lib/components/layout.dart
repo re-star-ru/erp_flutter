@@ -1,10 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-abstract class LayoutSelector {
-  Widget pc({String? id});
-  Widget phone({String? id});
-}
-
 enum ScreenSize { phone, pc }
 
 ScreenSize getSize(BuildContext context) {

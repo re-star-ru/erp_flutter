@@ -19,6 +19,10 @@ class DiagnosticServiceClient extends $grpc.Client {
       '/DiagnosticService/Create',
       ($0.Empty value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.Diagnostic.fromBuffer(value));
+  static final _$read = $grpc.ClientMethod<$1.ID, $1.Diagnostic>(
+      '/DiagnosticService/Read',
+      ($1.ID value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.Diagnostic.fromBuffer(value));
   static final _$update = $grpc.ClientMethod<$1.Diagnostic, $1.Diagnostic>(
       '/DiagnosticService/Update',
       ($1.Diagnostic value) => value.writeToBuffer(),
@@ -36,6 +40,11 @@ class DiagnosticServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.Diagnostic> create($0.Empty request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$create, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Diagnostic> read($1.ID request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$read, request, options: options);
   }
 
   $grpc.ResponseFuture<$1.Diagnostic> update($1.Diagnostic request,
@@ -60,6 +69,13 @@ abstract class DiagnosticServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.Empty.fromBuffer(value),
         ($1.Diagnostic value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.ID, $1.Diagnostic>(
+        'Read',
+        read_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.ID.fromBuffer(value),
+        ($1.Diagnostic value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$1.Diagnostic, $1.Diagnostic>(
         'Update',
         update_Pre,
@@ -81,6 +97,11 @@ abstract class DiagnosticServiceBase extends $grpc.Service {
     return create(call, await request);
   }
 
+  $async.Future<$1.Diagnostic> read_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.ID> request) async {
+    return read(call, await request);
+  }
+
   $async.Future<$1.Diagnostic> update_Pre(
       $grpc.ServiceCall call, $async.Future<$1.Diagnostic> request) async {
     return update(call, await request);
@@ -92,6 +113,7 @@ abstract class DiagnosticServiceBase extends $grpc.Service {
   }
 
   $async.Future<$1.Diagnostic> create($grpc.ServiceCall call, $0.Empty request);
+  $async.Future<$1.Diagnostic> read($grpc.ServiceCall call, $1.ID request);
   $async.Future<$1.Diagnostic> update(
       $grpc.ServiceCall call, $1.Diagnostic request);
   $async.Future<$1.DiagnosticList> list(
