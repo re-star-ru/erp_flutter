@@ -1,5 +1,9 @@
+.PHONY: run build generate
+
 run:
 	flutter run -d linux
+build:
+	flutter build linux --release 
 
 generate:
 	protoc \

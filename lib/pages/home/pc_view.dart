@@ -5,8 +5,8 @@ import 'package:test_flutter/repo/search/search.dart';
 import 'package:test_flutter/pages/sku_info/sku_pc_view.dart';
 import 'package:test_flutter/pages/sku_info/sku_cubit.dart';
 
-class HomePC extends StatelessWidget {
-  HomePC({super.key});
+class Home extends StatelessWidget {
+  Home({super.key});
 
   final focus = FocusNode();
 
